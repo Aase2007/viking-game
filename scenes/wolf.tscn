@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkj8jk5fdmoo7"]
+
+[ext_resource type="Script" path="res://scripts/wolf.gd" id="1_rh6m6"]
+[ext_resource type="Texture2D" uid="uid://wit7dxxh7u33" path="res://sprites/characters/wolf-Sheet.png" id="2_gawje"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj864"]
+atlas = ExtResource("2_gawje")
+region = Rect2(4.36655, 18.6231, 55.2636, 39.8988)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2xdg"]
+size = Vector2(52, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edqc0"]
+size = Vector2(99, 71.875)
+
+[node name="Wolf" type="CharacterBody2D"]
+motion_mode = 1
+platform_floor_layers = 4294901760
+script = ExtResource("1_rh6m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_aj864")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_s2xdg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 3.0625)
+shape = SubResource("RectangleShape2D_edqc0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

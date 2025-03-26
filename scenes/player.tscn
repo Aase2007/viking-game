@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3dw7fr61gl1k"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_5nj3t"]
+[ext_resource type="Texture2D" uid="uid://va1lbialmvlu" path="res://sprites/characters/viking-Sheet.png" id="2_1dss8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryclq"]
+atlas = ExtResource("2_1dss8")
+region = Rect2(7.17672, 0.743679, 17.6582, 30.377)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esulh"]
+size = Vector2(14, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wugqk"]
+size = Vector2(27, 32)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_5nj3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_ryclq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_esulh")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wugqk")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
